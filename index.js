@@ -8,9 +8,11 @@ process.stdin.on('readable', function(){
                 process.stdout.write('see ya\n');
                 process.exit();
                 break;
-            case '/info':
+            case '/lang':
                 var lang = process.env.LANG || 'no lang info'; // no system language info on mac ???
                 console.log(lang + '\n');
+                break;
+            case '/ver':
                 console.log(process.versions.node + '\n');
                 break;
             case '':
