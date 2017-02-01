@@ -1,3 +1,5 @@
+var osInfo = require('./modules/OSInfo');
+
 process.stdin.on('readable', function(){
     var input = process.stdin.read();
     if (input !== null) {
@@ -17,6 +19,9 @@ process.stdin.on('readable', function(){
                 break;
             case '':
                 process.stderr.write('empty string\n');
+                break;
+            case '/getOSinfo':
+                osInfo.allInfo();
                 break;
             default:
                 process.stdout.write(instruction + '\n');
