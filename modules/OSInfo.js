@@ -1,5 +1,6 @@
 var os = require('os');
 var timeFormat = require('./timeFormat');
+var colors = require('colors/safe');
 
 function getOsInfo() {
     var type = os.type();
@@ -12,13 +13,13 @@ function getOsInfo() {
     } else if (type === 'Windows_NT') {
         type = 'winda';
     }
-    console.log('system: ', type);
-    console.log('release: ', release);
-    console.log('CPU: ', cpu);
-    console.log('uptime1: ', timeFormat.secondsToMinutes(uptime));
-    console.log('uptime2: ', timeFormat.secondsToHours(uptime))
-    console.log('user name: ', userInfo.username);
-    console.log('home dir: ', userInfo.homedir);
+    console.log(colors.grey('system: '), type);
+    console.log(colors.red('release: '), release);
+    console.log(colors.green('CPU: '), cpu);
+    console.log(colors.cyan('uptime1: '), timeFormat.secondsToMinutes(uptime));
+    console.log(colors.blue('uptime2: '), timeFormat.secondsToHours(uptime))
+    console.log(colors.magenta('user name: '), userInfo.username);
+    console.log(colors.rainbow('home dir: '), userInfo.homedir);
 }
 
 exports.allInfo = getOsInfo;

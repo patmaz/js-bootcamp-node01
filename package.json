@@ -1,0 +1,23 @@
+{
+  "name": "node01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patmaz/js-bootcamp-node01.git"
+  },
+  "author": "PM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/patmaz/js-bootcamp-node01/issues"
+  },
+  "homepage": "https://github.com/patmaz/js-bootcamp-node01#readme",
+  "dependencies": {
+    "colors": "^1.1.2"
+  }
+}
