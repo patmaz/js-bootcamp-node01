@@ -1,4 +1,5 @@
 var osInfo = require('./modules/OSInfo');
+var fs = require('./modules/fs');
 var eventEmitter = require('events').EventEmitter;
 
 var emitter = new eventEmitter();
@@ -11,6 +12,8 @@ emitter.on('afterCommand', function() {
 process.on('exit', function(){
     emitter.emit('afterCommand');
 });
+
+var args = process.argv.slice(2);
 
 process.stdin.on('readable', function(){
     var input = process.stdin.read();
@@ -34,6 +37,18 @@ process.stdin.on('readable', function(){
                 break;
             case '/getOSinfo':
                 osInfo.allInfo();
+                break;
+            case '/getFileInfo':
+                fs.getFileInfo(args[0]);
+                break;
+            case '/readFile':
+                fs.readFile(args[0]);
+                break;
+            case '/writeFile':
+                fs.writeFile(args[0], args[1]);
+                break;
+            case '/writeRootDir':
+                fs.writeRootDir();
                 break;
             default:
                 process.stdout.write(instruction + '\n');

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/patmaz/js-bootcamp-node01#readme",
   "dependencies": {
-    "colors": "^1.1.2"
+    "colors": "^1.1.2",
+    "stat-mode": "^0.2.2"
   }
 }
