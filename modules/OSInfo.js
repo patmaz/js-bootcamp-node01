@@ -23,3 +23,4 @@ function getOsInfo() {
 }
 
 exports.allInfo = getOsInfo;
+exports.colors = colors;

@@ -1,10 +1,22 @@
 var osInfo = require('./modules/OSInfo');
+var eventEmitter = require('events').EventEmitter;
+
+var emitter = new eventEmitter();
+emitter.on('beforeCommand', function(instruction) {
+    console.log(osInfo.colors.green('Before execution') + '\n instruction: ' + instruction);
+});
+emitter.on('afterCommand', function() {
+    console.log(osInfo.colors.red('Finished \n '));
+});
+process.on('exit', function(){
+    emitter.emit('afterCommand');
+});
 
 process.stdin.on('readable', function(){
     var input = process.stdin.read();
     if (input !== null) {
         var instruction = input.toString().trim();
-
+        emitter.emit('beforeCommand', instruction);
         switch (instruction) {
             case '/exit':
                 process.stdout.write('see ya\n');
@@ -26,5 +38,6 @@ process.stdin.on('readable', function(){
             default:
                 process.stdout.write(instruction + '\n');
         }
+        emitter.emit('afterCommand');
     }
 });
