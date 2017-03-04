@@ -2,10 +2,13 @@ var fs = require('fs');
 var StatMode = require('stat-mode');
 var colors = require('colors/safe');
 
+process.on('uncaughtException', function(err) {
+    console.error('Uncaught error', err);
+});
+
 function getFileInfo(filePath) {
     if (filePath) {
         fs.stat(filePath, function(err, stats){
-            if (err) throw err;
             var statMode = new StatMode(stats);
             console.log(statMode.toString());
         });
@@ -17,7 +20,6 @@ function getFileInfo(filePath) {
 function readFile(filePath) {
     if (filePath) {
         fs.readFile(filePath, 'utf-8', function(err, data){
-            if (err) throw err;
             console.log(data);
         });
     } else {
@@ -29,11 +31,9 @@ function writeFile(filePath, content) {
     if (filePath && content) {
         content += '\n';
         fs.readFile(filePath, 'utf-8', function(err, data){
-            if (err) throw err;
             console.log(colors.red('before write'))
             console.log(data);
             fs.appendFile(filePath, content, function(err){
-                if (err) throw err;
                 fs.readFile(filePath, 'utf-8', function(err, data){
                     console.log(colors.green('After write'));
                     console.log(data);
@@ -47,16 +47,14 @@ function writeFile(filePath, content) {
 
 function writeRootDir() {
     fs.readdir('./', function(err, data){
-        if (err) throw err;
         var itemsString = '';
         data.forEach(function(item, index){
             item += '\n';
-            itemsString = itemsString.concat(item);
+            itemsString += item;
         });
         fs.writeFile('./files/rootDir.txt', itemsString, function(err){
-            if (err) throw err;
+            console.log('root dir content has been written!');
         });
-        console.log('root dir content has been written!');
     });
 }
 
